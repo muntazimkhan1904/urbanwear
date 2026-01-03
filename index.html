@@ -1,0 +1,2115 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>URBANWEAR — Premium Streetwear</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <style>
+    /* ========== BASE RESET ========== */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      background: #f5f5f7;
+      color: #0f172a;
+      line-height: 1.6;
+    }
+
+    img {
+      max-width: 100%;
+      display: block;
+    }
+
+    a {
+      text-decoration: none;
+      color: inherit;
+    }
+
+    button {
+      font: inherit;
+      cursor: pointer;
+    }
+
+    .container {
+      width: min(1200px, 100% - 32px);
+      margin: 0 auto;
+    }
+
+    :root {
+  /* Backgrounds */
+  --bg: #f3f4f6;
+  --bg-soft: #ffffff;
+  --bg-soft-alt: #f9fafb;
+
+  /* Borders */
+  --border-subtle: rgba(15, 23, 42, 0.12);
+  --border-strong: rgba(15, 23, 42, 0.25);
+
+  /* Text */
+  --text-main: #020617;
+  --text-muted: #64748b;
+
+  /* Brand Accent */
+  --accent: #16a34a;
+  --accent-soft: rgba(22, 163, 74, 0.1);
+  --accent-strong: #15803d;
+
+  /* Shadows */
+  --shadow-soft: 0 18px 45px rgba(2, 6, 23, 0.08);
+
+  /* Radius */
+  --radius-card: 20px;
+  --radius-soft: 999px;
+
+  /* Motion */
+  --transition-fast: 0.18s ease;
+  --transition-med: 0.3s ease;
+}
+
+    /* ========== TOP BAR ========== */
+    .top-bar {
+      background: #020617;
+      color: #e5e7eb;
+      text-align: center;
+      padding: 6px 12px;
+      font-size: 13px;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      animation: slideDown 0.6s ease-out;
+    }
+
+    @keyframes slideDown {
+      from {
+        opacity: 0;
+        transform: translateY(-10px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    /* ========== HEADER ========== */
+    .header {
+      position: sticky;
+      top: 0;
+      z-index: 50;
+      background: rgba(245, 245, 247, 0.95);
+      backdrop-filter: blur(14px);
+      border-bottom: 1px solid rgba(148, 163, 184, 0.35);
+    }
+
+    .header-inner {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+      padding: 14px 0;
+    }
+
+    .logo {
+      font-weight: 800;
+      letter-spacing: 0.26em;
+      font-size: 18px;
+      text-transform: uppercase;
+      transition: transform var(--transition-fast);
+    }
+
+    .logo:hover {
+      transform: scale(1.05);
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 18px;
+      font-size: 14px;
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+      color: #4b5563;
+    }
+
+    .nav-links a {
+      position: relative;
+      padding-bottom: 4px;
+      transition: color var(--transition-fast);
+    }
+
+    .nav-links a::after {
+      content: "";
+      position: absolute;
+      left: 0;
+      bottom: 0;
+      width: 0;
+      height: 2px;
+      background: var(--accent);
+      transition: width var(--transition-fast);
+    }
+
+    .nav-links a:hover {
+      color: var(--accent);
+    }
+
+    .nav-links a:hover::after {
+      width: 100%;
+    }
+
+    .nav-actions {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .icon-btn {
+      width: 34px;
+      height: 34px;
+      border-radius: var(--radius-soft);
+      border: 1px solid var(--border-subtle);
+      background: #ffffff;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #4b5563;
+      font-size: 16px;
+      transition: background var(--transition-fast), border-color var(--transition-fast), transform 0.1s, box-shadow var(--transition-fast);
+      position: relative;
+    }
+
+    .icon-btn:hover {
+      background: var(--accent-soft);
+      border-color: var(--accent);
+      transform: translateY(-2px);
+      box-shadow: 0 8px 18px rgba(15, 23, 42, 0.08);
+    }
+
+    .icon-btn.active {
+      background: var(--accent);
+      color: white;
+      border-color: var(--accent);
+    }
+
+    .cart-count {
+      position: absolute;
+      top: -6px;
+      right: -6px;
+      background: #ef4444;
+      color: white;
+      width: 18px;
+      height: 18px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 10px;
+      font-weight: 700;
+    }
+
+    .hamburger {
+      display: none;
+      width: 32px;
+      height: 32px;
+      flex-direction: column;
+      justify-content: center;
+      gap: 4px;
+      background: #ffffff;
+      border: 1px solid var(--border-subtle);
+      border-radius: 999px;
+      padding: 4px 6px;
+      transition: background var(--transition-fast), border-color var(--transition-fast);
+    }
+
+    .hamburger span {
+      height: 2px;
+      width: 100%;
+      background: #111827;
+      border-radius: 999px;
+      transition: all 0.3s ease;
+    }
+
+    .hamburger.active span:nth-child(1) {
+      transform: rotate(45deg) translateY(10px);
+    }
+
+    .hamburger.active span:nth-child(2) {
+      opacity: 0;
+    }
+
+    .hamburger.active span:nth-child(3) {
+      transform: rotate(-45deg) translateY(-10px);
+    }
+
+    .hamburger:hover {
+      background: var(--accent-soft);
+      border-color: var(--accent);
+    }
+
+    /* ========== HERO ========== */
+    .hero {
+      padding: 32px 0 40px;
+      background: radial-gradient(circle at top left, #ffffff 0, #f5f5f7 50%);
+      border-bottom: 1px solid rgba(148, 163, 184, 0.3);
+    }
+
+    .hero-inner {
+      display: grid;
+      grid-template-columns: minmax(0, 1.2fr) minmax(0, 1fr);
+      gap: 32px;
+      align-items: center;
+    }
+
+    .badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 4px 10px;
+      border-radius: 999px;
+      border: 1px solid rgba(148, 163, 184, 0.7);
+      font-size: 11px;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: #4b5563;
+      margin-bottom: 10px;
+      background: #ffffff;
+      animation: badgePulse 2s ease-in-out infinite;
+    }
+
+    @keyframes badgePulse {
+      0%, 100% {
+        opacity: 1;
+        transform: scale(1);
+      }
+      50% {
+        opacity: 0.8;
+        transform: scale(1.02);
+      }
+    }
+
+    .badge::before {
+      content: "";
+      width: 6px;
+      height: 6px;
+      border-radius: 999px;
+      background: var(--accent);
+      animation: dotPulse 1.5s ease-in-out infinite;
+    }
+
+    @keyframes dotPulse {
+      0%, 100% {
+        transform: scale(1);
+        opacity: 1;
+      }
+      50% {
+        transform: scale(1.3);
+        opacity: 0.6;
+      }
+    }
+
+    .hero h1 {
+      font-size: clamp(36px, 4vw, 48px);
+      text-transform: uppercase;
+      letter-spacing: 0.16em;
+      margin-bottom: 12px;
+      background: linear-gradient(135deg, #020617 0%, #4b5563 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    .hero-sub {
+      font-size: 15px;
+      max-width: 480px;
+      color: var(--text-muted);
+      margin-bottom: 16px;
+    }
+
+    .hero-buttons {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-bottom: 14px;
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      padding: 10px 18px;
+      border-radius: 999px;
+      font-size: 14px;
+      border: 1px solid transparent;
+      transition: background var(--transition-med), color var(--transition-med), border-color var(--transition-med), transform 0.12s, box-shadow var(--transition-med);
+      white-space: nowrap;
+      font-weight: 600;
+    }
+
+    .btn.primary {
+      background: var(--accent);
+      color: white;
+      box-shadow: 0 15px 30px rgba(22, 163, 74, 0.35);
+    }
+
+    .btn.primary:hover {
+      background: var(--accent-strong);
+      transform: translateY(-3px);
+      box-shadow: 0 25px 50px rgba(22, 163, 74, 0.45);
+    }
+
+    .btn.primary:active {
+      transform: translateY(-1px);
+    }
+
+    .btn.ghost {
+      border-color: var(--border-subtle);
+      color: #111827;
+      background: #ffffff;
+    }
+
+    .btn.ghost:hover {
+      border-color: var(--accent);
+      background: var(--accent-soft);
+      transform: translateY(-3px);
+    }
+
+    .hero-meta {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      font-size: 12px;
+      color: var(--text-muted);
+    }
+
+    .hero-meta span {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 4px 10px;
+      border-radius: 999px;
+      background: #ffffff;
+      border: 1px solid rgba(148, 163, 184, 0.4);
+      animation: slideInUp 0.8s ease-out both;
+    }
+
+    .hero-meta span:nth-child(2) {
+      animation-delay: 0.1s;
+    }
+
+    @keyframes slideInUp {
+      from {
+        opacity: 0;
+        transform: translateY(20px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    .hero-media {
+      position: relative;
+      border-radius: 24px;
+      overflow: hidden;
+      border: 1px solid rgba(148, 163, 184, 0.4);
+      background: linear-gradient(140deg, #e5e7eb, #f9fafb);
+      min-height: 260px;
+      box-shadow: var(--shadow-soft);
+      animation: heroReveal 1.2s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
+    }
+
+    @keyframes heroReveal {
+      from {
+        opacity: 0;
+        transform: translateY(60px) scale(0.9);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+      }
+    }
+
+    .hero-media-tag {
+      position: absolute;
+      top: 14px;
+      right: 14px;
+      padding: 4px 10px;
+      border-radius: 999px;
+      background: rgba(255, 255, 255, 0.92);
+      border: 1px solid rgba(148, 163, 184, 0.6);
+      font-size: 11px;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: #4b5563;
+      z-index: 10;
+    }
+
+    .hero-media-inner {
+      position: absolute;
+      inset: 0;
+      display: flex;
+      align-items: flex-end;
+      justify-content: center;
+      padding: 20px;
+    }
+
+    .hero-model {
+      width: 75%;
+      max-width: 260px;
+      aspect-ratio: 3 / 4;
+      border-radius: 22px;
+      background: linear-gradient(165deg, #111827, #0f172a);
+      border: 1px solid rgba(15, 23, 42, 0.8);
+      position: relative;
+      overflow: hidden;
+      color: white;
+      display: flex;
+      align-items: flex-end;
+      justify-content: center;
+      animation: heroFloat 6s ease-in-out infinite;
+    }
+
+    @keyframes heroFloat {
+      0%, 100% {
+        transform: translateY(0);
+      }
+      50% {
+        transform: translateY(-18px);
+      }
+    }
+
+    .hero-model::before {
+      content: "URBAN DROP 01";
+      position: absolute;
+      top: 12px;
+      left: 12px;
+      font-size: 10px;
+      letter-spacing: 0.18em;
+      color: rgba(209, 213, 219, 0.85);
+    }
+
+    .hero-model::after {
+      content: "OVERSIZED TEE • 240 GSM";
+      position: absolute;
+      bottom: 12px;
+      left: 12px;
+      font-size: 11px;
+      color: rgba(229, 231, 235, 0.96);
+    }
+
+    .hero-model-inner {
+      width: 130%;
+      height: 130%;
+      background: radial-gradient(circle at center, rgba(249, 250, 251, 0.08), transparent 60%);
+    }
+
+    /* ========== SECTION GENERIC ========== */
+    section {
+      padding: 32px 0;
+    }
+
+    .section-head {
+      display: flex;
+      align-items: baseline;
+      justify-content: space-between;
+      margin-bottom: 18px;
+      gap: 12px;
+    }
+
+    .section-head h2 {
+      font-size: 20px;
+      text-transform: uppercase;
+      letter-spacing: 0.18em;
+    }
+
+    .section-head span {
+      font-size: 13px;
+      color: var(--text-muted);
+    }
+
+    .section-link {
+      font-size: 13px;
+      color: #4b5563;
+      text-transform: uppercase;
+      letter-spacing: 0.14em;
+      transition: color var(--transition-fast), transform var(--transition-fast);
+    }
+
+    .section-link:hover {
+      color: var(--accent-strong);
+      transform: translateX(4px);
+    }
+
+    /* ========== PREMIUM FADE-UP ANIMATION ========== */
+    .fade-up {
+      opacity: 0;
+      transform: translateY(60px) scale(0.95);
+      transition: opacity 1.2s cubic-bezier(0.34, 1.56, 0.64, 1), transform 1.2s cubic-bezier(0.34, 1.56, 0.64, 1);
+    }
+
+    .fade-up.visible {
+      opacity: 1;
+      transform: translateY(0) scale(1);
+    }
+
+    /* ========== 3D CARD HOVER ========== */
+    .product-card,
+    .category-card,
+    .look-card,
+    .review-card,
+    .blog-card {
+      transform-style: preserve-3d;
+    }
+
+    .product-card:hover,
+    .category-card:hover,
+    .look-card:hover {
+      transform: translateY(-12px) rotateX(4deg) scale(1.02);
+      box-shadow: 0 40px 80px rgba(0, 0, 0, 0.15), inset 0 1px 0 rgba(255, 255, 255, 0.4);
+    }
+
+    /* ========== CATEGORIES ========== */
+    .categories-wrap {
+      background: var(--bg-soft);
+      border-radius: var(--radius-card);
+      padding: 20px 18px 18px;
+      border: 1px solid var(--border-subtle);
+      box-shadow: var(--shadow-soft);
+    }
+
+    .categories-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+      gap: 12px;
+      margin-top: 6px;
+    }
+
+    .category-card {
+      position: relative;
+      border-radius: 14px;
+      overflow: hidden;
+      background: var(--bg-soft-alt);
+      border: 1px solid rgba(148, 163, 184, 0.5);
+      padding: 16px 14px;
+      min-height: 90px;
+      display: flex;
+      align-items: flex-end;
+      justify-content: space-between;
+      gap: 6px;
+      cursor: pointer;
+      transition: transform var(--transition-fast), box-shadow var(--transition-fast), border-color var(--transition-fast), background var(--transition-fast);
+    }
+
+    .category-card:hover {
+      transform: translateY(-4px);
+      box-shadow: var(--shadow-soft);
+      border-color: var(--accent);
+      background: #ffffff;
+    }
+
+    .category-card-title {
+      font-size: 14px;
+      text-transform: uppercase;
+      letter-spacing: 0.18em;
+    }
+
+    .category-card-meta {
+      font-size: 11px;
+      color: var(--text-muted);
+      margin-top: 3px;
+    }
+
+    .category-pill {
+      font-size: 11px;
+      padding: 4px 8px;
+      border-radius: 999px;
+      border: 1px solid var(--border-subtle);
+      color: #4b5563;
+      background: #ffffff;
+    }
+
+    /* ========== PRODUCTS GRID ========== */
+    .products-section {
+      background: transparent;
+    }
+
+    .products-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(190px, 1fr));
+      gap: 16px;
+    }
+
+    .product-card {
+      position: relative;
+      border-radius: var(--radius-card);
+      overflow: hidden;
+      border: 1px solid rgba(148, 163, 184, 0.45);
+      background: var(--bg-soft);
+      padding: 10px 10px 12px;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+      transition: transform var(--transition-med), box-shadow var(--transition-med), border-color var(--transition-med), background var(--transition-med);
+    }
+
+    .product-card:hover {
+      transform: translateY(-8px);
+      box-shadow: var(--shadow-soft);
+      border-color: var(--accent);
+      background: #ffffff;
+    }
+
+    .product-media {
+      border-radius: 14px;
+      overflow: hidden;
+      background: linear-gradient(150deg, #e5e7eb, #f9fafb);
+      aspect-ratio: 4 / 5;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+      transition: transform var(--transition-med);
+    }
+
+    .product-card:hover .product-media {
+      transform: scale(1.04);
+    }
+
+    .product-media::after {
+      content: "URBAN";
+      position: absolute;
+      top: 10px;
+      left: 10px;
+      font-size: 10px;
+      letter-spacing: 0.22em;
+      color: rgba(107, 114, 128, 0.8);
+    }
+
+    .product-media img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .product-badge {
+      position: absolute;
+      top: 10px;
+      right: 10px;
+      font-size: 11px;
+      text-transform: uppercase;
+      letter-spacing: 0.18em;
+      padding: 3px 9px;
+      border-radius: 999px;
+      background: rgba(255, 255, 255, 0.96);
+      border: 1px solid rgba(148, 163, 184, 0.85);
+      color: #4b5563;
+      z-index: 5;
+    }
+
+    .product-badge.hot {
+      border-color: rgba(248, 113, 113, 0.9);
+      color: #b91c1c;
+    }
+
+    .product-badge.sale {
+      border-color: rgba(52, 211, 153, 0.9);
+      color: #047857;
+    }
+
+    .product-info {
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+      margin-top: 4px;
+    }
+
+    .product-title {
+      font-size: 14px;
+      font-weight: 600;
+    }
+
+    .product-meta {
+      font-size: 11px;
+      color: var(--text-muted);
+    }
+
+    .product-bottom {
+      margin-top: 6px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 6px;
+    }
+
+    .price {
+      font-size: 14px;
+      font-weight: 600;
+      color: var(--accent);
+    }
+
+    .old-price {
+      font-size: 11px;
+      color: #9ca3af;
+      text-decoration: line-through;
+      margin-left: 4px;
+    }
+
+    .discount-tag {
+      font-size: 11px;
+      color: #16a34a;
+      margin-left: 4px;
+      font-weight: 600;
+    }
+
+    .btn-small {
+      padding: 7px 12px;
+      border-radius: 999px;
+      border: 1px solid var(--border-subtle);
+      background: #ffffff;
+      color: #111827;
+      font-size: 11px;
+      text-transform: uppercase;
+      letter-spacing: 0.16em;
+      white-space: nowrap;
+      transition: background var(--transition-med), border-color var(--transition-med), color var(--transition-med), transform var(--transition-med), box-shadow var(--transition-med);
+      font-weight: 600;
+    }
+
+    .btn-small:hover {
+      border-color: var(--accent);
+      background: var(--accent-soft);
+      color: var(--accent-strong);
+      transform: translateY(-3px);
+      box-shadow: 0 12px 24px rgba(22, 163, 74, 0.2);
+    }
+
+    .btn-small.added {
+      background: var(--accent);
+      color: white;
+      border-color: var(--accent);
+      animation: addedPulse 0.5s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
+      box-shadow: 0 15px 35px rgba(22, 163, 74, 0.4);
+    }
+
+    @keyframes addedPulse {
+      0% {
+        transform: scale(1);
+        opacity: 1;
+      }
+      50% {
+        transform: scale(1.2);
+        opacity: 0.9;
+      }
+      100% {
+        transform: scale(1);
+        opacity: 1;
+      }
+    }
+
+    /* ========== USP STRIP ========== */
+    .usp-strip {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+      gap: 12px;
+      padding: 16px 18px;
+      border-radius: var(--radius-card);
+      border: 1px solid var(--border-subtle);
+      background: #ffffff;
+      margin-top: 18px;
+      box-shadow: var(--shadow-soft);
+    }
+
+    .usp-item {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 12px;
+      color: var(--text-muted);
+    }
+
+    .usp-icon {
+      width: 26px;
+      height: 26px;
+      border-radius: 999px;
+      background: var(--accent-soft);
+      border: 1px solid rgba(22, 163, 74, 0.4);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 14px;
+      color: var(--accent-strong);
+      flex-shrink: 0;
+    }
+
+    /* ========== BRAND STORY ========== */
+    .brand-section {
+      display: grid;
+      grid-template-columns: minmax(0, 1.1fr) minmax(0, 1fr);
+      gap: 26px;
+      align-items: center;
+    }
+
+    .brand-card {
+      background: #ffffff;
+      border-radius: var(--radius-card);
+      border: 1px solid var(--border-subtle);
+      padding: 18px 18px 16px;
+      box-shadow: var(--shadow-soft);
+    }
+
+    .brand-card h3 {
+      font-size: 17px;
+      text-transform: uppercase;
+      letter-spacing: 0.18em;
+      margin-bottom: 10px;
+    }
+
+    .brand-card p {
+      font-size: 14px;
+      color: var(--text-muted);
+    }
+
+    .brand-list {
+      margin-top: 10px;
+      font-size: 13px;
+      color: var(--text-muted);
+    }
+
+    .brand-list li {
+      margin-bottom: 4px;
+      list-style: disc;
+      margin-left: 16px;
+    }
+
+    .brand-media {
+      background: #ffffff;
+      border-radius: var(--radius-card);
+      padding: 18px;
+      border: 1px solid var(--border-subtle);
+      box-shadow: var(--shadow-soft);
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 10px;
+      font-size: 12px;
+      color: var(--text-muted);
+    }
+
+    .brand-chip {
+      padding: 8px 10px;
+      border-radius: 14px;
+      border: 1px solid var(--border-subtle);
+      background: var(--bg-soft-alt);
+      transition: all var(--transition-fast);
+    }
+
+    .brand-chip:hover {
+      border-color: var(--accent);
+      background: var(--accent-soft);
+    }
+
+    .brand-chip strong {
+      display: block;
+      font-size: 12px;
+      color: var(--text-main);
+      margin-bottom: 2px;
+    }
+
+    /* ========== REVIEWS ========== */
+    .reviews-wrap {
+      background: #ffffff;
+      border-radius: var(--radius-card);
+      border: 1px solid var(--border-subtle);
+      box-shadow: var(--shadow-soft);
+      padding: 18px;
+    }
+
+    .reviews-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 12px;
+      margin-top: 6px;
+    }
+
+    .review-card {
+      border-radius: 14px;
+      border: 1px solid rgba(148, 163, 184, 0.5);
+      background: var(--bg-soft-alt);
+      padding: 12px 12px 10px;
+      font-size: 12px;
+      color: var(--text-muted);
+      transition: border-color var(--transition-med), box-shadow var(--transition-med), transform var(--transition-med), background var(--transition-med);
+    }
+
+    .review-card:hover {
+      border-color: var(--accent);
+      box-shadow: var(--shadow-soft);
+      background: #ffffff;
+      transform: translateY(-4px);
+    }
+
+    .review-stars {
+      color: #f59e0b;
+      font-size: 13px;
+      margin-bottom: 4px;
+    }
+
+    .review-user {
+      font-size: 11px;
+      color: #9ca3af;
+      margin-top: 6px;
+    }
+
+    /* ========== LOOKBOOK ========== */
+    .lookbook-wrap {
+      background: #ffffff;
+      border-radius: var(--radius-card);
+      border: 1px solid var(--border-subtle);
+      box-shadow: var(--shadow-soft);
+      padding: 18px;
+    }
+
+    .lookbook-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(190px, 1fr));
+      gap: 12px;
+      margin-top: 8px;
+    }
+
+    .look-card {
+      border-radius: 14px;
+      border: 1px solid rgba(148, 163, 184, 0.5);
+      background: linear-gradient(140deg, #e5e7eb, #f9fafb);
+      padding: 12px;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+      font-size: 12px;
+      color: var(--text-muted);
+      transition: transform var(--transition-med), box-shadow var(--transition-med), border-color var(--transition-med), background var(--transition-med);
+      overflow: hidden;
+    }
+
+    .look-card img {
+      width: 100%;
+      height: 200px;
+      object-fit: cover;
+      border-radius: 10px;
+      margin-bottom: 4px;
+    }
+
+    .look-card:hover {
+      transform: translateY(-6px);
+      box-shadow: var(--shadow-soft);
+      border-color: var(--accent);
+      background: #ffffff;
+    }
+
+    .look-tag {
+      font-size: 10px;
+      text-transform: uppercase;
+      letter-spacing: 0.18em;
+      color: #4b5563;
+    }
+
+    .look-title {
+      font-size: 13px;
+      color: var(--text-main);
+      font-weight: 600;
+    }
+
+    /* ========== BLOG ========== */
+    .blog-wrap {
+      background: #ffffff;
+      border-radius: var(--radius-card);
+      border: 1px solid var(--border-subtle);
+      box-shadow: var(--shadow-soft);
+      padding: 18px;
+    }
+
+    .blog-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 12px;
+      margin-top: 8px;
+    }
+
+    .blog-card {
+      border-radius: 14px;
+      border: 1px solid rgba(148, 163, 184, 0.5);
+      background: var(--bg-soft-alt);
+      padding: 12px;
+      font-size: 12px;
+      color: var(--text-muted);
+      transition: transform var(--transition-med), box-shadow var(--transition-med), border-color var(--transition-med), background var(--transition-med);
+    }
+
+    .blog-card:hover {
+      transform: translateY(-4px);
+      box-shadow: var(--shadow-soft);
+      border-color: var(--accent);
+      background: #ffffff;
+    }
+
+    .blog-tag {
+      font-size: 10px;
+      text-transform: uppercase;
+      letter-spacing: 0.18em;
+      color: #4b5563;
+      margin-bottom: 4px;
+    }
+
+    .blog-title {
+      font-size: 13px;
+      color: var(--text-main);
+      font-weight: 600;
+      margin-bottom: 4px;
+    }
+
+    /* ========== NEWSLETTER ========== */
+    .newsletter-wrap {
+      display: grid;
+      grid-template-columns: minmax(0, 1.3fr) minmax(0, 1fr);
+      gap: 20px;
+      align-items: center;
+    }
+
+    .newsletter-card {
+      background: #ffffff;
+      border-radius: var(--radius-card);
+      border: 1px solid var(--border-subtle);
+      box-shadow: var(--shadow-soft);
+      padding: 18px 18px 16px;
+    }
+
+    .newsletter-card h3 {
+      font-size: 16px;
+      text-transform: uppercase;
+      letter-spacing: 0.18em;
+      margin-bottom: 6px;
+    }
+
+    .newsletter-card p {
+      font-size: 13px;
+      color: var(--text-muted);
+      margin-bottom: 10px;
+    }
+
+    .newsletter-form {
+      display: flex;
+      gap: 8px;
+      flex-wrap: wrap;
+    }
+
+    .newsletter-form input {
+      flex: 1;
+      min-width: 160px;
+      padding: 9px 12px;
+      border-radius: 999px;
+      border: 1px solid var(--border-subtle);
+      background: #ffffff;
+      color: var(--text-main);
+      font-size: 13px;
+      transition: border-color var(--transition-fast), box-shadow var(--transition-fast);
+    }
+
+    .newsletter-form input:focus {
+      outline: none;
+      border-color: var(--accent);
+      box-shadow: 0 0 0 3px var(--accent-soft);
+    }
+
+    .newsletter-form input::placeholder {
+      color: #9ca3af;
+    }
+
+    .social-strip {
+      background: #ffffff;
+      border-radius: var(--radius-card);
+      border: 1px solid var(--border-subtle);
+      box-shadow: var(--shadow-soft);
+      padding: 16px;
+      font-size: 12px;
+      color: var(--text-muted);
+    }
+
+    .social-strip-head {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 8px;
+      gap: 8px;
+    }
+
+    .social-strip-head span {
+      font-size: 12px;
+    }
+
+    .social-grid {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: 6px;
+    }
+
+    .social-thumb {
+      border-radius: 10px;
+      background: linear-gradient(135deg, #e5e7eb, #f3f4f6);
+      aspect-ratio: 1;
+      overflow: hidden;
+    }
+
+    .social-thumb img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .social-links-small {
+      margin-top: 8px;
+      display: flex;
+      gap: 6px;
+    }
+
+    .social-links-small a {
+      font-size: 11px;
+      text-transform: uppercase;
+      letter-spacing: 0.18em;
+      padding: 4px 8px;
+      border-radius: 999px;
+      border: 1px solid var(--border-subtle);
+      background: #ffffff;
+      transition: all var(--transition-fast);
+    }
+
+    .social-links-small a:hover {
+      border-color: var(--accent);
+      background: var(--accent-soft);
+      color: var(--accent-strong);
+    }
+
+    /* ========== FOOTER ========== */
+    .footer {
+      border-top: 1px solid rgba(148, 163, 184, 0.4);
+      padding: 24px 0 20px;
+      background: #ffffff;
+      margin-top: 16px;
+    }
+
+    .footer-grid {
+      display: grid;
+      grid-template-columns: minmax(0, 1.6fr) repeat(2, minmax(0, 1fr)) minmax(0, 1.4fr);
+      gap: 18px;
+      margin-bottom: 16px;
+      font-size: 13px;
+      color: var(--text-muted);
+    }
+
+    .footer h3 {
+      font-size: 16px;
+      text-transform: uppercase;
+      letter-spacing: 0.18em;
+      margin-bottom: 6px;
+    }
+
+    .footer h4 {
+      font-size: 13px;
+      text-transform: uppercase;
+      letter-spacing: 0.18em;
+      margin-bottom: 8px;
+      color: var(--text-main);
+    }
+
+    .footer a {
+      display: block;
+      font-size: 13px;
+      margin-bottom: 3px;
+      color: var(--text-muted);
+      transition: color var(--transition-fast), transform var(--transition-fast);
+    }
+
+    .footer a:hover {
+      color: var(--accent-strong);
+      transform: translateX(4px);
+    }
+
+    .footer-bottom {
+      display: flex;
+      justify-content: space-between;
+      font-size: 11px;
+      color: #9ca3af;
+      gap: 10px;
+      flex-wrap: wrap;
+      padding-top: 8px;
+      border-top: 1px solid rgba(148, 163, 184, 0.4);
+    }
+
+    /* ========== CART MODAL ========== */
+    .cart-modal {
+      display: none;
+      position: fixed;
+      inset: 0;
+      background: rgba(0, 0, 0, 0.5);
+      z-index: 1000;
+      animation: fadeIn 0.3s ease-out;
+    }
+
+    .cart-modal.active {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    @keyframes fadeIn {
+      from {
+        opacity: 0;
+      }
+      to {
+        opacity: 1;
+      }
+    }
+
+    .cart-content {
+      background: white;
+      border-radius: 24px;
+      padding: 24px;
+      max-width: 500px;
+      width: 90%;
+      max-height: 80vh;
+      overflow-y: auto;
+      animation: slideUp 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+    }
+
+    @keyframes slideUp {
+      from {
+        opacity: 0;
+        transform: translateY(40px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    .cart-close {
+      float: right;
+      background: none;
+      border: none;
+      font-size: 24px;
+      cursor: pointer;
+      color: #9ca3af;
+      transition: color var(--transition-fast);
+    }
+
+    .cart-close:hover {
+      color: var(--text-main);
+    }
+
+    .cart-item {
+      display: flex;
+      gap: 12px;
+      padding: 12px 0;
+      border-bottom: 1px solid var(--border-subtle);
+      align-items: center;
+    }
+
+    .cart-item:last-child {
+      border-bottom: none;
+    }
+
+    .cart-item-img {
+      width: 60px;
+      height: 60px;
+      border-radius: 10px;
+      background: linear-gradient(135deg, #e5e7eb, #f3f4f6);
+      overflow: hidden;
+    }
+
+    .cart-item-img img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .cart-item-info {
+      flex: 1;
+    }
+
+    .cart-item-title {
+      font-size: 13px;
+      font-weight: 600;
+      margin-bottom: 2px;
+    }
+
+    .cart-item-price {
+      font-size: 12px;
+      color: var(--accent);
+      font-weight: 600;
+    }
+
+    .cart-item-remove {
+      background: none;
+      border: none;
+      color: #ef4444;
+      cursor: pointer;
+      font-size: 18px;
+      transition: transform var(--transition-fast);
+    }
+
+    .cart-item-remove:hover {
+      transform: scale(1.2);
+    }
+
+    .cart-empty {
+      text-align: center;
+      padding: 20px 0;
+      color: var(--text-muted);
+    }
+
+    .cart-total {
+      padding-top: 16px;
+      margin-top: 16px;
+      border-top: 2px solid var(--border-subtle);
+      display: flex;
+      justify-content: space-between;
+      font-weight: 600;
+      font-size: 16px;
+    }
+
+    .cart-checkout {
+      width: 100%;
+      margin-top: 16px;
+      padding: 12px 18px;
+      background: var(--accent);
+      color: white;
+      border: none;
+      border-radius: 999px;
+      font-weight: 600;
+      font-size: 14px;
+      cursor: pointer;
+      transition: background var(--transition-fast), transform 0.1s;
+    }
+
+    .cart-checkout:hover {
+      background: var(--accent-strong);
+      transform: translateY(-2px);
+    }
+
+    /* ========== RESPONSIVE ========== */
+    @media (max-width: 900px) {
+      .nav-links {
+        display: none;
+      }
+
+      .hamburger {
+        display: flex;
+      }
+
+      .hero-inner {
+        grid-template-columns: minmax(0, 1fr);
+      }
+
+      .hero-media {
+        order: -1;
+      }
+
+      .brand-section {
+        grid-template-columns: minmax(0, 1fr);
+      }
+
+      .newsletter-wrap {
+        grid-template-columns: minmax(0, 1fr);
+      }
+
+      .footer-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+    }
+
+    @media (max-width: 640px) {
+      .header-inner {
+        padding: 12px 0;
+      }
+
+      section {
+        padding: 24px 0;
+      }
+
+      .section-head {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+
+      .categories-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+
+      .footer-grid {
+        grid-template-columns: minmax(0, 1fr);
+      }
+
+      .social-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+
+      .products-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Top promo bar -->
+  <div class="top-bar">
+    FREE SHIPPING ABOVE ₹1499 • CASH ON DELIVERY • EASY 7‑DAY EXCHANGE
+  </div>
+
+  <!-- Header -->
+  <header class="header">
+    <div class="container header-inner">
+      <div class="logo">URBANWEAR</div>
+
+      <nav class="nav-links">
+        <a href="#new">New Drops</a>
+        <a href="#men">Men</a>
+        <a href="#women">Women</a>
+        <a href="#oversized">Oversized</a>
+        <a href="#journal">Journal</a>
+      </nav>
+
+      <div class="nav-actions">
+        <button class="icon-btn" aria-label="Search">🔍</button>
+        <button class="icon-btn" aria-label="Login">👤</button>
+        <button class="icon-btn" aria-label="Cart" id="cartBtn">
+          🛒
+          <span class="cart-count" id="cartCount" style="display: none;">0</span>
+        </button>
+        <button class="hamburger" aria-label="Toggle menu" id="hamburger">
+          <span></span><span></span><span></span>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- Hero -->
+  <section class="hero">
+    <div class="container hero-inner fade-up">
+      <div>
+        <div class="badge">NEW DROP • SS25</div>
+        <h1>Own The Street.</h1>
+        <p class="hero-sub">
+          Everyday premium streetwear with oversized fits, heavyweight fabrics and clean silhouettes made for Indian streets and weather.
+        </p>
+
+        <div class="hero-buttons">
+          <button class="btn primary">Shop New Arrivals</button>
+          <button class="btn ghost">Explore Collections</button>
+        </div>
+
+        <div class="hero-meta">
+          <span>⭐ 4.8/5 Rated by 10k+ customers</span>
+          <span>🚚 3–5 Day Pan‑India Delivery</span>
+        </div>
+      </div>
+
+      <div class="hero-media">
+        <div class="hero-media-tag">Streetwear Label • India</div>
+        <div class="hero-media-inner">
+          <div class="hero-model">
+            <img src="C:\Users\Admin\Downloads\couple.jpg" alt="Urbanwear hero" style="width:100%; height:100%; object-fit:cover;">
+            <div class="hero-model-inner"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Categories -->
+  <section>
+    <div class="container fade-up">
+      <div class="categories-wrap">
+        <div class="section-head">
+          <h2>Shop by Category</h2>
+        </div>
+        <div class="categories-grid">
+          <div class="category-card" id="men">
+            <div>
+              <div class="category-card-title">Men</div>
+              <div class="category-card-meta">Tees, hoodies, cargos</div>
+            </div>
+            <div class="category-pill">119+ styles</div>
+          </div>
+          <div class="category-card" id="women">
+            <div>
+              <div class="category-card-title">Women</div>
+              <div class="category-card-meta">Cropped fits, co‑ords</div>
+            </div>
+            <div class="category-pill">82+ styles</div>
+          </div>
+          <div class="category-card" id="oversized">
+            <div>
+              <div class="category-card-title">Oversized</div>
+              <div class="category-card-meta">Heavyweight 240 GSM</div>
+            </div>
+            <div class="category-pill">56+ styles</div>
+          </div>
+          <div class="category-card">
+            <div>
+              <div class="category-card-title">Hoodies</div>
+              <div class="category-card-meta">Fleece • Winter ready</div>
+            </div>
+            <div class="category-pill">34+ styles</div>
+          </div>
+          <div class="category-card">
+            <div>
+              <div class="category-card-title">Bottoms</div>
+              <div class="category-card-meta">Cargos, joggers</div>
+            </div>
+            <div class="category-pill">41+ styles</div>
+          </div>
+          <div class="category-card">
+            <div>
+              <div class="category-card-title">Caps & Accessories</div>
+              <div class="category-card-meta">Caps, beanies, bags</div>
+            </div>
+            <div class="category-pill">27+ styles</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Products -->
+  <section class="products-section" id="new">
+    <div class="container fade-up">
+      <div class="section-head">
+        <div>
+          <h2>New Drops</h2>
+          <span>Limited runs • Once sold out, no restock</span>
+        </div>
+        <a href="#" class="section-link">View all products</a>
+      </div>
+
+      <div class="products-grid" id="productsGrid">
+        <!-- JS will insert cards -->
+      </div>
+
+      <!-- USP strip -->
+      <div class="usp-strip">
+        <div class="usp-item">
+          <div class="usp-icon">✅</div>
+          <span>Premium 220–320 GSM fabrics designed to last multiple washes.</span>
+        </div>
+        <div class="usp-item">
+          <div class="usp-icon">🚚</div>
+          <span>Pan‑India shipping with 24–48h dispatch from our warehouse.</span>
+        </div>
+        <div class="usp-item">
+          <div class="usp-icon">↩️</div>
+          <span>7‑day easy exchanges on eligible products and sizes.</span>
+        </div>
+        <div class="usp-item">
+          <div class="usp-icon">💳</div>
+          <span>COD, UPI, cards and netbanking with secure payments.</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Brand story -->
+  <section>
+    <div class="container brand-section fade-up">
+      <div class="brand-card">
+        <h3>The Label</h3>
+        <p>
+          URBANWEAR is a modern Indian streetwear label building premium everyday fits with clean silhouettes, heavyweight fabrics and minimal branding.
+        </p>
+        <ul class="brand-list">
+          <li>Designed for Indian weather and daily wear.</li>
+          <li>Focus on fit: oversized but structured, not sloppy.</li>
+          <li>Limited drops so your fits stay exclusive.</li>
+        </ul>
+      </div>
+
+      <div class="brand-media">
+        <div class="brand-chip">
+          <strong>Fabric First</strong>
+          220–320 GSM cotton blends, pre‑shrunk to reduce post‑wash surprises.
+        </div>
+        <div class="brand-chip">
+          <strong>Made to Move</strong>
+          Relaxed silhouettes built for college, work, gigs and late‑night drives.
+        </div>
+        <div class="brand-chip">
+          <strong>Local Label</strong>
+          Designed and crafted in India with global streetwear references.
+        </div>
+        <div class="brand-chip">
+          <strong>Fair Pricing</strong>
+          Direct‑to‑consumer, no heavy retailer mark‑ups, just honest quality.
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Reviews -->
+  <section>
+    <div class="container fade-up">
+      <div class="reviews-wrap">
+        <div class="section-head">
+          <div>
+            <h2>What they say</h2>
+            <span>Real reviews from URBANWEAR customers</span>
+          </div>
+          <span class="section-link">4.8/5 • 10k+ ratings</span>
+        </div>
+
+        <div class="reviews-grid">
+          <div class="review-card">
+            <div class="review-stars">★★★★★</div>
+            "Fabric is thick, falls perfectly and still feels breathable in Delhi heat. Sizing guide was accurate."
+            <div class="review-user">— Aarav, New Delhi</div>
+          </div>
+          <div class="review-card">
+            <div class="review-stars">★★★★★</div>
+            "Oversized hoodie fit is on point, prints didn't crack even after multiple washes. Delivery was quick."
+            <div class="review-user">— Kavya, Mumbai</div>
+          </div>
+          <div class="review-card">
+            <div class="review-stars">★★★★☆</div>
+            "Love the minimal branding and colours. Would love more women‑specific oversized options."
+            <div class="review-user">— Nisha, Bengaluru</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Lookbook -->
+  <section>
+    <div class="container fade-up">
+      <div class="lookbook-wrap">
+        <div class="section-head">
+          <div>
+            <h2>Street lookbook</h2>
+            <span>How the community styles URBANWEAR</span>
+          </div>
+          <a href="#" class="section-link">View all looks</a>
+        </div>
+
+        <div class="lookbook-grid">
+          <div class="look-card">
+            <div class="look-tag">Monochrome</div>
+            <div class="look-title">All black oversized</div>
+            <p>Pair heavyweight black tee with stone cargos and monochrome sneakers for a clean silhouette.</p>
+          </div>
+          <div class="look-card">
+            <div class="look-tag">Campus fits</div>
+            <div class="look-title">Tee, cargos, cap</div>
+            <p>Daily driver look built with oversized tee, utility cargos and logo cap.</p>
+          </div>
+          <div class="look-card">
+            <div class="look-tag">Night drives</div>
+            <div class="look-title">Hoodie layers</div>
+            <p>Throw on a graphic hoodie over base tee with joggers for late‑night runs.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Journal, Newsletter, Social -->
+  <section id="journal">
+    <div class="container fade-up">
+      <div class="blog-wrap">
+        <div class="section-head">
+          <div>
+            <h2>Journal</h2>
+            <span>Guides to styling and care</span>
+          </div>
+          <a href="#" class="section-link">Read all</a>
+        </div>
+
+        <div class="blog-grid">
+          <div class="blog-card">
+            <div class="blog-tag">Style guide</div>
+            <div class="blog-title">How to style oversized tees in summer</div>
+            <p>Three easy ways to balance proportions and keep it breathable in 35°C heat.</p>
+          </div>
+          <div class="blog-card">
+            <div class="blog-tag">Care</div>
+            <div class="blog-title">Make heavyweight fabrics last longer</div>
+            <p>Simple wash‑care routines to keep your tees from losing shape and colour.</p>
+          </div>
+          <div class="blog-card">
+            <div class="blog-tag">Drop notes</div>
+            <div class="blog-title">Behind the SS25 street essentials drop</div>
+            <p>The moodboard, fabrics and colours that shaped this season's collection.</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="newsletter-wrap" style="margin-top:18px;">
+        <div class="newsletter-card">
+          <h3>Early access list</h3>
+          <p>Join the list for early access to drops, secret sales and restock alerts. No spam, only good fits.</p>
+          <form class="newsletter-form" onsubmit="return false;">
+            <input type="email" placeholder="Enter your email" />
+            <button class="btn primary" type="submit" style="font-size:12px;padding-inline:16px;">Join Now</button>
+          </form>
+        </div>
+
+        <div class="social-strip">
+          <div class="social-strip-head">
+            <span>#urbanwear</span>
+            <span>Tag us to get featured</span>
+          </div>
+          <div class="social-grid">
+            <div class="social-thumb"><img src="couple.jpg" alt=""></div>
+            <div class="social-thumb"><img src="https://www.meanwhilebackonthefarm.com/cdn/shop/files/MeanwhileBackOnTheFarm-December_26of144_w_db4a9572-5064-4f21-af80-173139e023e3.jpg?v=1763060973" alt=""></div>
+            <div class="social-thumb"><img src="https://m.media-amazon.com/images/I/81TIF0HxjLL._AC_UY1100_.jpg" alt=""></div>
+            <div class="social-thumb"><img src="https://offmint.com/cdn/shop/files/Olive_overshirt_by_offmint_800x.jpg?v=1704171678" alt=""></div>
+          </div>
+          <div class="social-links-small">
+            <a href="#">Instagram</a>
+            <a href="#">YouTube</a>
+            <a href="#">X</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-grid">
+        <div>
+          <h3>URBANWEAR</h3>
+          <p>Premium streetwear label from India focused on clean silhouettes, heavyweight fabrics and everyday comfort.</p>
+        </div>
+        <div>
+          <h4>Shop</h4>
+          <a href="#new">New Drops</a>
+          <a href="#men">Men</a>
+          <a href="#women">Women</a>
+          <a href="#oversized">Oversized</a>
+          <a href="#">Sale</a>
+        </div>
+        <div>
+          <h4>Support</h4>
+          <a href="#">Contact</a>
+          <a href="#">FAQs</a>
+          <a href="#">Shipping</a>
+          <a href="#">Returns</a>
+        </div>
+        <div>
+          <h4>Info</h4>
+          <a href="#">About</a>
+          <a href="#">Privacy policy</a>
+          <a href="#">Terms & conditions</a>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <span>© 2025 URBANWEAR. All rights reserved.</span>
+        <span>Made for the streets.</span>
+        <span>Designed and Developed by <a href="https://www.skylineitsolutions.com/">Skyline IT Solutions</a></span>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Cart Modal -->
+  <div class="cart-modal" id="cartModal">
+    <div class="cart-content">
+      <button class="cart-close" onclick="closeCart()">✕</button>
+      <h2 style="margin-bottom: 16px;">Your Cart</h2>
+      <div id="cartItems"></div>
+      <div id="cartEmptyMsg" class="cart-empty">Your cart is empty</div>
+      <div id="cartSummary" style="display: none;">
+        <div class="cart-total">
+          <span>Subtotal:</span>
+          <span id="cartTotal">₹0</span>
+        </div>
+        <button class="cart-checkout" onclick="checkout()">Proceed to Checkout</button>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    // Product data
+    const products = [
+      { title: "Oversized Graphic Tee — Noir", price: "₹1,299", oldPrice: "₹1,599", badge: "New", badgeType: "default", meta: "240 GSM • Relaxed fit", discount: "-19%", image: "https://i.etsystatic.com/26466345/r/il/51daee/3441548233/il_570xN.3441548233_nawa.jpg" },
+      { title: "Street Hoodie — Midnight", price: "₹1,999", oldPrice: "", badge: "Hot", badgeType: "hot", meta: "Fleece • Winter ready", discount: "", image: "https://midnightlaw.com/cdn/shop/files/back-nb.jpg?v=1765983147&width=1280" },
+      { title: "Snapback Cap — Urban Logo", price: "₹799", oldPrice: "", badge: "", badgeType: "", meta: "One size • Adjustable", discount: "", image: "https://m.media-amazon.com/images/I/81TIF0HxjLL._AC_UY1100_.jpg" },
+      { title: "Cargo Joggers — Stone", price: "₹1,799", oldPrice: "", badge: "New", badgeType: "default", meta: "Utility pockets • Tapered", discount: "", image: "https://m.media-amazon.com/images/I/51D3T2OEu6L.jpg" },
+      { title: "Oversized Tee — Concrete", price: "₹1,199", oldPrice: "₹1,499", badge: "Sale", badgeType: "sale", meta: "Heavyweight cotton", discount: "-20%", image: "https://u-mercari-images.mercdn.net/photos/m86089612036_1.jpg" },
+      { title: "Boxy Tee — Cloud White", price: "₹999", oldPrice: "", badge: "", badgeType: "", meta: "190 GSM • Boxy fit", discount: "", image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRBROJYy-nx2L2rKFmLNnZNsriO9urs3zW8NA&s" },
+      { title: "Street Co‑ord Set — Ash", price: "₹2,799", oldPrice: "₹3,199", badge: "Drop 01", badgeType: "default", meta: "Tee + Shorts", discount: "-13%", image: "https://assets.myntassets.com/w_360,q_50,,dpr_2,fl_progressive,f_webp/assets/images/2025/JUNE/6/y9Sy2r88_a2ad6b9ec99642d2b611ff01c90b37e1.jpg" },
+      { title: "Puffer Jacket — Night", price: "₹3,499", oldPrice: "", badge: "Limited", badgeType: "hot", meta: "Lightweight insulation", discount: "", image: "https://m.media-amazon.com/images/I/716kD7yEFvL._SX569_.jpg" },
+      { title: "Track Pants — Shadow", price: "₹1,599", oldPrice: "", badge: "", badgeType: "", meta: "Zipped pockets", discount: "", image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQBpJVSJFyI__rk2AzW-hkHju_wRoq_8J44rg&s" },
+      { title: "Graphic Hoodie — Neon Grid", price: "₹2,099", oldPrice: "₹2,399", badge: "Sale", badgeType: "sale", meta: "Front + back print", discount: "-13%", image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSBbvqjIiTrbCoNFjWe8byigyE-msiap4s0Zw&s" },
+      { title: "Classic Cap — Minimal Logo", price: "₹749", oldPrice: "", badge: "", badgeType: "", meta: "Everyday essential", discount: "", image: "https://www.candidaura.com/cdn/shop/files/classic-dad-hat-khaki-front-6485facddee59.png?v=1686502110" },
+      { title: "Women Crop Hoodie — Slate", price: "₹1,899", oldPrice: "", badge: "New", badgeType: "default", meta: "Relaxed crop fit", discount: "", image: "https://muselot.in/cdn/shop/products/Plain-maroon-crop-hoodie_35a59860-befc-4aca-a453-6a3e294108e4_2048x2048.jpg?v=1641670407" },
+      { title: "Women Oversized Tee — Lilac", price: "₹1,299", oldPrice: "", badge: "", badgeType: "", meta: "Soft cotton blend", discount: "", image: "https://m.media-amazon.com/images/I/71fv8EBoHHL._AC_UY1100_.jpg" },
+      { title: "Utility Shirt — Olive", price: "₹1,699", oldPrice: "", badge: "", badgeType: "", meta: "Overshirt • Layering", discount: "", image: "https://offmint.com/cdn/shop/files/Olive_overshirt_by_offmint_800x.jpg?v=1704171678" },
+      { title: "Tote Bag — Street Script", price: "₹899", oldPrice: "", badge: "New", badgeType: "default", meta: "Canvas • Everyday carry", discount: "", image: "https://www.meanwhilebackonthefarm.com/cdn/shop/files/MeanwhileBackOnTheFarm-December_26of144_w_db4a9572-5064-4f21-af80-173139e023e3.jpg?v=1763060973" }
+    ];
+
+    let cart = JSON.parse(localStorage.getItem('cart')) || [];
+
+    // Render products
+    const productsGrid = document.getElementById("productsGrid");
+
+    function createProductCard(product, index) {
+      const card = document.createElement("article");
+      card.className = "product-card";
+
+      const media = document.createElement("div");
+      media.className = "product-media";
+      
+      const img = document.createElement("img");
+      img.src = product.image;
+      img.alt = product.title;
+      media.appendChild(img);
+
+      if (product.badge) {
+        const badge = document.createElement("div");
+        badge.className = "product-badge";
+        if (product.badgeType === "hot") badge.classList.add("hot");
+        if (product.badgeType === "sale") badge.classList.add("sale");
+        badge.textContent = product.badge;
+        media.appendChild(badge);
+      }
+
+      const info = document.createElement("div");
+      info.className = "product-info";
+
+      const title = document.createElement("div");
+      title.className = "product-title";
+      title.textContent = product.title;
+
+      const meta = document.createElement("div");
+      meta.className = "product-meta";
+      meta.textContent = product.meta;
+
+      info.appendChild(title);
+      info.appendChild(meta);
+
+      const bottom = document.createElement("div");
+      bottom.className = "product-bottom";
+
+      const priceWrapper = document.createElement("div");
+      const price = document.createElement("span");
+      price.className = "price";
+      price.textContent = product.price;
+      priceWrapper.appendChild(price);
+
+      if (product.oldPrice) {
+        const oldPrice = document.createElement("span");
+        oldPrice.className = "old-price";
+        oldPrice.textContent = product.oldPrice;
+        priceWrapper.appendChild(oldPrice);
+      }
+
+      if (product.discount) {
+        const disc = document.createElement("span");
+        disc.className = "discount-tag";
+        disc.textContent = product.discount;
+        priceWrapper.appendChild(disc);
+      }
+
+      const cta = document.createElement("button");
+      cta.className = "btn-small";
+      cta.textContent = "Add to Cart";
+      cta.onclick = (e) => addToCart(product, index, cta);
+
+      bottom.appendChild(priceWrapper);
+      bottom.appendChild(cta);
+
+      card.appendChild(media);
+      card.appendChild(info);
+      card.appendChild(bottom);
+
+      return card;
+    }
+
+    products.forEach((p, i) => {
+      productsGrid.appendChild(createProductCard(p, i));
+    });
+
+    // Cart functions
+    function addToCart(product, index, button) {
+      const existingItem = cart.find(item => item.title === product.title);
+      
+      if (existingItem) {
+        existingItem.quantity += 1;
+      } else {
+        cart.push({...product, quantity: 1, id: index});
+      }
+
+      localStorage.setItem('cart', JSON.stringify(cart));
+      
+      // Animate button with premium feedback
+      button.classList.add("added");
+      button.textContent = "✓ Added to Cart!";
+      button.disabled = true;
+      
+      setTimeout(() => {
+        button.classList.remove("added");
+        button.textContent = "Add to Cart";
+        button.disabled = false;
+      }, 2000);
+
+      updateCartCount();
+    }
+
+    function updateCartCount() {
+      const count = cart.reduce((sum, item) => sum + item.quantity, 0);
+      const cartCount = document.getElementById("cartCount");
+      if (count > 0) {
+        cartCount.textContent = count;
+        cartCount.style.display = "flex";
+      } else {
+        cartCount.style.display = "none";
+      }
+    }
+
+    function openCart() {
+      const modal = document.getElementById("cartModal");
+      modal.classList.add("active");
+      renderCart();
+    }
+
+    function closeCart() {
+      const modal = document.getElementById("cartModal");
+      modal.classList.remove("active");
+    }
+
+    function renderCart() {
+      const cartItems = document.getElementById("cartItems");
+      const emptyMsg = document.getElementById("cartEmptyMsg");
+      const summary = document.getElementById("cartSummary");
+      
+      cartItems.innerHTML = "";
+
+      if (cart.length === 0) {
+        emptyMsg.style.display = "block";
+        summary.style.display = "none";
+        return;
+      }
+
+      emptyMsg.style.display = "none";
+      summary.style.display = "block";
+
+      cart.forEach((item, idx) => {
+        const itemDiv = document.createElement("div");
+        itemDiv.className = "cart-item";
+
+        const img = document.createElement("div");
+        img.className = "cart-item-img";
+        const imgTag = document.createElement("img");
+        imgTag.src = item.image;
+        img.appendChild(imgTag);
+
+        const info = document.createElement("div");
+        info.className = "cart-item-info";
+
+        const title = document.createElement("div");
+        title.className = "cart-item-title";
+        title.textContent = item.title;
+
+        const price = document.createElement("div");
+        price.className = "cart-item-price";
+        price.textContent = `${item.price} x ${item.quantity}`;
+
+        info.appendChild(title);
+        info.appendChild(price);
+
+        const remove = document.createElement("button");
+        remove.className = "cart-item-remove";
+        remove.textContent = "✕";
+        remove.onclick = () => removeFromCart(idx);
+
+        itemDiv.appendChild(img);
+        itemDiv.appendChild(info);
+        itemDiv.appendChild(remove);
+
+        cartItems.appendChild(itemDiv);
+      });
+
+      updateCartTotal();
+    }
+
+    function removeFromCart(index) {
+      cart.splice(index, 1);
+      localStorage.setItem('cart', JSON.stringify(cart));
+      updateCartCount();
+      renderCart();
+    }
+
+    function updateCartTotal() {
+      const total = cart.reduce((sum, item) => {
+        const price = parseInt(item.price.replace(/[₹,]/g, ''));
+        return sum + (price * item.quantity);
+      }, 0);
+      document.getElementById("cartTotal").textContent = `₹${total.toLocaleString()}`;
+    }
+
+    function checkout() {
+      alert('🎉 Checkout would proceed here!\n\nTotal Items: ' + cart.reduce((sum, item) => sum + item.quantity, 0));
+    }
+
+    // Event listeners
+    document.getElementById("cartBtn").addEventListener("click", openCart);
+    document.getElementById("cartModal").addEventListener("click", (e) => {
+      if (e.target === document.getElementById("cartModal")) closeCart();
+    });
+
+    // Hamburger menu
+    const hamburger = document.getElementById("hamburger");
+    const navLinks = document.querySelector(".nav-links");
+
+    hamburger.addEventListener("click", () => {
+      hamburger.classList.toggle("active");
+      navLinks.style.display = navLinks.style.display === "flex" ? "none" : "flex";
+      if (navLinks.style.display === "flex") {
+        navLinks.style.flexDirection = "column";
+        navLinks.style.background = "#ffffff";
+        navLinks.style.position = "absolute";
+        navLinks.style.top = "56px";
+        navLinks.style.left = "0";
+        navLinks.style.right = "0";
+        navLinks.style.padding = "12px 16px";
+        navLinks.style.borderBottom = "1px solid rgba(148, 163, 184, 0.35)";
+        navLinks.style.gap = "8px";
+      }
+    });
+
+    // Fade-up animation
+    const fadeEls = document.querySelectorAll(".fade-up");
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add("visible");
+            observer.unobserve(entry.target);
+          }
+        });
+      },
+      { threshold: 0.1 }
+    );
+
+    fadeEls.forEach((el) => observer.observe(el));
+
+    // Initialize
+    updateCartCount();
+
+    // Close mobile menu on link click
+    navLinks.querySelectorAll("a").forEach(link => {
+      link.addEventListener("click", () => {
+        hamburger.classList.remove("active");
+        navLinks.style.display = "none";
+      });
+    });
+  </script>
+</body>
+</html>
